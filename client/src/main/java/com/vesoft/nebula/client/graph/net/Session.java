@@ -111,9 +111,13 @@ public class Session {
         }
         try {
             connection.signout(sessionID);
+        } catch (Exception e) {
+            log.warn("Signout out failed:" + e.getMessage());
+        }
+        try {
             pool.returnConnection(connection);
         } catch (Exception e) {
-            log.warn("Signout out failed or return object to pool failed:" + e.getMessage());
+            log.warn("return object to pool failed:" + e.getMessage());
         }
         connection = null;
     }
